@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User-details</title>
+</head>
+<body>
+<script>
+    const userId = new URL(location.href).searchParams.get('userId');
+    function createStructure (user, block) {
+        for (const key in user) {
+            if (typeof user[key] === "object"){
+                ulCreate (key,user[key], block)
+            }else {
+                const li = document.createElement("li");
+                li.innerText = `${key} : ${user[key]}`
+                block.appendChild(li)
+            }
+
+        }
+
+    }
+    function ulCreate(key, value, block){
+        const ul = document.createElement('ul');
+        const li = document.createElement('li');
+        block.appendChild(li);
+        li.appendChild(ul);
+        ul.innerText = key;
+        createStructure(value, ul)
+    }
+    function btnPosts(userId){
+        const button = document.createElement('button');
+        document.body.appendChild(button)
+        button.innerText = 'post of current user'
+        button.onclick = ()=> {
+            showPosts();
+        }
+    }
+    function showPosts(){
+        fetch(`https://jsonplaceholder.typicode.com/users/${userId}/posts`)
+            .then(posts => posts.json())
+            .then(posts => {
+                for (const post in posts) {
+                    const onePost = posts[post]
+                    const div = document.createElement("div");
+                    const button = document.createElement('button');
+                    document.body.appendChild(div);
+                    div.innerText = onePost.id + ') ' + onePost.title
+                    div.appendChild(button);
+                    button.innerText = 'post details';
+                    button.onclick = () =>{
+                        location.href=`../PostDetails/post-details.html?UserId=${userId}&&PostId=${onePost.id}`
+                    }
+
+                }
+
+            })
+
+
+
+    }
+
+
+
+    const user = async ()=>{
+        await fetch(`https://jsonplaceholder.typicode.com/users/${userId}`)
+            .then(user => user.json())
+            .then(user =>{
+                const ul = document.createElement('ul');
+                document.body.appendChild(ul)
+                createStructure(user, ul);
+                btnPosts(userId);
+            })
+    }
+
+
+
+    user();
+
+</script>
+</body>
+</html>

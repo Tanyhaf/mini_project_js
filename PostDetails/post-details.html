@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Posts details</title>
+</head>
+<body>
+
+<script>
+    const postId = new URL(location.href).searchParams.get('PostId')
+    const userId = new URL(location.href).searchParams.get('UserId')
+
+
+
+
+
+    function postsDetails(){
+        fetch(`https://jsonplaceholder.typicode.com/users/${userId}/posts`)
+            .then(posts=>posts.json())
+            .then(posts =>{
+                    for (const i in posts) {
+                        const infoPost=posts[i]
+                        if (infoPost.id.toString() === postId){
+                            for (const infoPostKey in infoPost) {
+                                const div = document.createElement("div");
+                                div.innerText = `${infoPostKey}: ${infoPost[infoPostKey]}`
+                                document.body.appendChild(div);
+                            }
+                        }
+                    }
+                    const button = document.createElement("button");
+                    button.innerText = 'Comments'
+                    document.body.appendChild(button)
+                    button.onclick = comments()
+                }
+                )
+    }
+
+
+    function comments (){
+
+
+    }
+
+    postsDetails();
+
+
+</script>
+
+</body>
+</html>
