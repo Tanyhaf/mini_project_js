@@ -12,8 +12,6 @@
 
 
 
-
-
     function postsDetails(){
         fetch(`https://jsonplaceholder.typicode.com/users/${userId}/posts`)
             .then(posts=>posts.json())
@@ -31,16 +29,40 @@
                     const button = document.createElement("button");
                     button.innerText = 'Comments'
                     document.body.appendChild(button)
-                    button.onclick = comments()
+                    button.onclick =()=> getComments()
+
+
                 }
-                )
+            )
     }
 
 
-    function comments (){
+    function getComments (){
+        fetch(`https://jsonplaceholder.typicode.com/posts/${postId}/comments`)
+            .then(comments =>comments.json())
+            .then(comments=>{
+                for (const commentsKey in comments) {
+                    createStructure(comments[commentsKey]);
+                }
+
+            })
 
 
     }
+
+    function createStructure (comment) {
+        const ul = document.createElement('ul');
+        document.body.appendChild(ul)
+        for (const commentKey in comment) {
+            const li = document.createElement('li');
+            ul.appendChild(li);
+            li.innerText = `${commentKey} : ${comment[commentKey]}`
+        }
+
+
+
+    }
+
 
     postsDetails();
 

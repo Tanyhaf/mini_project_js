@@ -1,0 +1,10 @@
+button{
+    width: 30%;
+}
+
+div{
+    display:inline-block;
+    border:1px solid black;
+    width: 40%;
+    float: left;
+}
