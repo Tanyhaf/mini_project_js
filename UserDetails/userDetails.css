@@ -1,0 +1,26 @@
+h2{
+    text-align: center;
+    text-decoration-line: underline;
+}
+
+li {
+    list-style-type: none;
+}
+
+button{
+    width: 90%;
+}
+
+.posts{
+    width:200px;
+    height:70px;
+    background:#f1f1f1;
+    float:left;
+    margin: 0 15px 15px 0;
+    text-align:center;
+    padding: 10px;
+}
+
+.posts button{
+    margin-top: auto;
+}

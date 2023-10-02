@@ -1,0 +1,12 @@
+h2{
+    text-align: center;
+    text-decoration-line: underline;
+}
+
+.container{
+    display: flex
+}
+.post{
+    margin: 5px;
+    border:2px solid black;
+}

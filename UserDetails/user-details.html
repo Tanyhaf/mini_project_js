@@ -2,9 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link href="userDetails.css" rel="stylesheet" type="text/css">
     <title>User-details</title>
 </head>
 <body>
+<h2>User Details</h2>
 <script>
     const userId = new URL(location.href).searchParams.get('userId');
     function createStructure (user, block) {
@@ -28,7 +30,7 @@
         ul.innerText = key;
         createStructure(value, ul)
     }
-    function btnPosts(userId){
+    function btnPosts(){
         const button = document.createElement('button');
         document.body.appendChild(button)
         button.innerText = 'post of current user'
@@ -43,6 +45,7 @@
                 for (const post in posts) {
                     const onePost = posts[post]
                     const div = document.createElement("div");
+                    div.className = 'posts'
                     const button = document.createElement('button');
                     document.body.appendChild(div);
                     div.innerText = onePost.id + ') ' + onePost.title
@@ -69,7 +72,7 @@
                 const ul = document.createElement('ul');
                 document.body.appendChild(ul)
                 createStructure(user, ul);
-                btnPosts(userId);
+                btnPosts();
             })
     }
 

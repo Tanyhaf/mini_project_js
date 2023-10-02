@@ -20,14 +20,17 @@
             .then(value => {
                 for (const user of value) {
                     let div = document.createElement('div');
+                    let divContainer = document.createElement('div');
+                    divContainer.className = 'container'
                     div.innerText = `${user.id} ${user.username}`;
-                    document.body.appendChild(div);
+                    document.body.appendChild(divContainer);
+                    divContainer.appendChild(div)
                     let button = document.createElement('button');
-                    button.innerText = 'details'
+                    button.innerText = 'Details'
                     button.onclick =  () => {
                         window.location.href=`UserDetails/user-details.html?userId=${user.id}`
                     }
-                    div.appendChild(button);
+                    divContainer.appendChild(button);
                 }
             });
     }

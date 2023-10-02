@@ -1,10 +1,19 @@
+body{
+    margin: 10px;
+    bottom: 0;
+}
+.container {
+    margin: 10px;
+    width: 40%;
+    display: inline-block;
+    }
+
 button{
-    width: 30%;
+    width: 100%;
 }
 
-div{
-    display:inline-block;
-    border:1px solid black;
-    width: 40%;
-    float: left;
+.container div{
+    border:2px solid black;
+    width: 100%;
+    text-align: center;
 }

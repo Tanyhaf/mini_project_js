@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Posts details</title>
+    <link href="postDetails.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
+<h2>Post Details</h2>
 
 <script>
     const postId = new URL(location.href).searchParams.get('PostId')
@@ -26,6 +28,7 @@
                             }
                         }
                     }
+
                     const button = document.createElement("button");
                     button.innerText = 'Comments'
                     document.body.appendChild(button)
@@ -41,8 +44,11 @@
         fetch(`https://jsonplaceholder.typicode.com/posts/${postId}/comments`)
             .then(comments =>comments.json())
             .then(comments=>{
+                const div = document.createElement('div');
+                div.className = 'container'
+                document.body.appendChild(div)
                 for (const commentsKey in comments) {
-                    createStructure(comments[commentsKey]);
+                    createStructure(comments[commentsKey], div);
                 }
 
             })
@@ -50,13 +56,15 @@
 
     }
 
-    function createStructure (comment) {
-        const ul = document.createElement('ul');
-        document.body.appendChild(ul)
+    function createStructure (comment, block) {
+
+        const div = document.createElement('div');
+        div.className = 'post'
+        block.appendChild(div)
         for (const commentKey in comment) {
-            const li = document.createElement('li');
-            ul.appendChild(li);
-            li.innerText = `${commentKey} : ${comment[commentKey]}`
+            const liDiv = document.createElement('div');
+            div.appendChild(liDiv);
+            liDiv.innerText = `${commentKey} : ${comment[commentKey]}`
         }
 
 
